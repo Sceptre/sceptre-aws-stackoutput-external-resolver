@@ -1,14 +1,24 @@
-# README
+# Stack Output External
 
-Add your resolver readme here. Remember to include the following:
+Fetches the value of an output from a different Stack in the same account and
+region. You can specify a optional AWS profile to connect to a different
+account/region.
 
-- Tell people how to install it (e.g. pip install ...).
-- Be clear about the purpose of the resolver, its capabilities and limitations.
-- Tell people how to use it.
-- Give examples of the resolver in use.
+If the Stack whose output is being fetched is in the same StackGroup, the
+basename of that Stack can be used.
 
-Read our wiki to learn how to use this repo:
-https://github.com/Sceptre/sceptre-resolver-template/wiki
+Syntax:
 
-If you have any questions or encounter an issue
-[please open an issue](https://github.com/Sceptre/sceptre-resolver-template/issues/new)
+```yaml
+parameters/sceptre_user_data:
+  <name>:
+    !stack_output_external <full_stack_name>::<output_name>
+    <optional-aws-profile-name>
+```
+
+Example:
+
+```yaml
+parameters:
+  VpcIdParameter: !stack_output_external prj-network-vpc::VpcIdOutput prod
+```
